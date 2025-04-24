@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useBikeNetworks } from '../hooks/useBikeNetwork';
 import { StationList } from './StationList';
 
 export const BikeNetworkList = () => {
     const { data, isLoading, error } = useBikeNetworks();
     const [openNetworkId, setOpenNetworkId] = useState<string | null>(null);
+    const { t } = useTranslation();
 
-    if (isLoading) return <p>Cargando redes...</p>;
-    if (error) return <p>Error al cargar las redes.</p>;
+    if (isLoading) return <p>{t('loadingNetworks')}</p>;
+    if (error) return <p>{t('errorNetworks')}</p>;
 
     return (
         <div className="grid gap-4">
@@ -27,18 +29,18 @@ export const BikeNetworkList = () => {
                         >
                             <h2 className="text-lg font-bold cursor-pointer">{network.name}</h2>
                             <p className="text-sm text-gray-700">
-                                {network.company?.join(', ') || 'Compañía desconocida'}
+                                {network.company?.join(', ') || t('unknownCompany')}
                             </p>
                             <p className="text-sm text-gray-600">
                                 {network.location.city}
                             </p>
                             <p className="text-sm text-gray-500">
-                                Sistema de reserva:{' '}
+                                {t('reservationSystem')}:{" "}
                                 {network.extra?.reservation === true
-                                    ? 'Sí'
+                                    ? t('yes')
                                     : network.extra?.reservation === false
-                                    ? 'No'
-                                    : 'Desconocido'}
+                                    ? t('no')
+                                    : t('unknown')}
                             </p>
                         </button>
 

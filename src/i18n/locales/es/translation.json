@@ -1,0 +1,22 @@
+{
+    "bikeNetworksTitle": "Redes de Bicicletas",
+    "stationsTitle": "Estaciones",
+    "loadingNetworks": "Cargando redes...",
+    "errorNetworks": "Error al cargar las redes.",
+    "loadingStations": "Cargando estaciones...",
+    "errorStations": "Falló al cargar las estaciones.",
+    "unknownCompany": "Compañía desconocida",
+    "reservationSystem": "Sistema de reserva",
+    "yes": "Sí",
+    "no": "No",
+    "unknown": "Desconocido",
+    "location": "Ubicación",
+    "viewOnMap": "Ver en Google Maps",
+    "lastUpdated": "Última actualización",
+    "unavailableDate": "Fecha no disponible",
+    "availability": "Disponibilidad",
+    "low": "Bajo",
+    "medium": "Medio",
+    "high": "Alto",
+    "paymentMethods": "Métodos de pago"
+}  
