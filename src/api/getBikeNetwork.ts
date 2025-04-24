@@ -10,6 +10,6 @@ type Network = {
     };
 };
 export const getBikeNetworks = async (): Promise<Network[]> => {
-    const response = await axios.get('https://api.citybik.es/v2/networks/')
+    const response = await axios.get('/api/networks');
     return response.data.networks.filter((network: any) => network.location.country === 'ES');  
 };
