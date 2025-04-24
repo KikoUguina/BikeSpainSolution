@@ -8,10 +8,10 @@ export const StationList = ({ networkId }: Props) => {
     const { data, isLoading, error } = useStations(networkId);
 
     if (isLoading) return <p>Cargando estaciones...</p>;
-    if (error) return <p>Algo ha fallado al cargar las estaciones.</p>;
+    if (error) return <p>Falló al cargar las estaciones.</p>;
 
     return (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {data?.map((station: any) => {
                 const { id, name, latitude, longitude, free_bikes, empty_slots, timestamp } = station;
     
@@ -25,7 +25,11 @@ export const StationList = ({ networkId }: Props) => {
                 return (
                     <div
                         key={id}
-                        className="border rounded-xl bg-white shadow p-4 h-44 flex flex-col justify-center text-left"
+                        className="rounded-xl bg-white shadow p-4 h-44 flex flex-col justify-center text-left transition-all duration-700 hover:-translate-y-2"
+                        style={{
+                            boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px;',
+                            maxWidth: '370px'
+                        }}
                     >
                         <h3 className="text-base font-semibold mb-1">{name}</h3>
                         <p className="text-sm mb-1">Ubicación: {latitude}, {longitude}</p>
@@ -37,27 +41,38 @@ export const StationList = ({ networkId }: Props) => {
                         >
                             Ver en Google Maps
                         </a>
-                        <p className="text-sm mb-1">Última actualización: {getRelativeTime(timestamp)}</p>
-                        <p className="text-sm">Disponibilidad: {availability}</p>
+                        <p className="text-sm text-gray-600">
+                            Última actualización:{' '}
+                            {timestamp
+                                ? timestamp
+                                    .split('T')[0]
+                                    .replace(/-/g, '.') + ' - ' + timestamp.split('T')[1].split('.')[0]
+                                : 'Fecha no disponible'}
+                        </p>
+
+                        <p className="text-sm flex items-center gap-2">
+                            Disponibilidad:
+                            <span
+                                className={`inline-block w-3 h-3 rounded-full ${
+                                    availability === 'Alto'
+                                        ? 'bg-green-500'
+                                        : availability === 'Medio'
+                                        ? 'bg-yellow-500'
+                                        : 'bg-red-500'
+                                }`}
+                            ></span>
+                            {availability}
+                        </p>
+
+
+                        {station.extra?.payment && station.extra.payment.length > 0 && (
+                            <p className="text-sm text-gray-600">
+                                Métodos de pago: {station.extra.payment.join(', ')}
+                            </p>
+                        )}
                     </div>
                 );
             })}
         </div>
     );    
 };
-
-function getRelativeTime(dateString: string) {
-    if (!dateString) return 'Fecha no disponible';
-
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) return 'Fecha inválida';
-
-    const now = Date.now();
-    const diff = Math.floor((now - date.getTime()) / 60000);
-
-    if (diff < 1) return 'justo ahora';
-    if (diff < 60) return `hace ${diff} min`;
-    if (diff < 1440) return `hace ${Math.floor(diff / 60)} h`;
-
-    return `hace ${Math.floor(diff / 1440)} días`;
-}

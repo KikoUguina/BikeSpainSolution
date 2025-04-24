@@ -15,20 +15,35 @@ export const BikeNetworkList = () => {
                 const isOpen = openNetworkId === network.id;
 
                 return (
-                    <div key={network.id} className="border rounded">
+                    <div
+                        key={network.id}
+                        className="rounded bg-white p-4 border transition-all duration-300"
+                    >
                         <button
                             onClick={() =>
                                 setOpenNetworkId(isOpen ? null : network.id)
                             }
-                            className="w-full text-left p-4 hover:bg-gray-100"
+                            className="w-full text-left"
                         >
-                            <h2 className="text-lg font-bold">{network.name}</h2>
-                            <p>{network.company?.join(', ') || 'Compañía desconocida'}</p>
-                            <p>{network.location.city}</p>
+                            <h2 className="text-lg font-bold cursor-pointer">{network.name}</h2>
+                            <p className="text-sm text-gray-700">
+                                {network.company?.join(', ') || 'Compañía desconocida'}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                                {network.location.city}
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                Sistema de reserva:{' '}
+                                {network.extra?.reservation === true
+                                    ? 'Sí'
+                                    : network.extra?.reservation === false
+                                    ? 'No'
+                                    : 'Desconocido'}
+                            </p>
                         </button>
 
                         {isOpen && (
-                            <div className="p-4 pt-0">
+                            <div className="pt-4">
                                 <StationList networkId={network.id} />
                             </div>
                         )}
