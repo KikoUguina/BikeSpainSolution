@@ -1,0 +1,22 @@
+{
+    "bikeNetworksTitle": "Bike Networks",
+    "stationsTitle": "Stations",
+    "loadingNetworks": "Loading networks...",
+    "errorNetworks": "Error loading networks.",
+    "loadingStations": "Loading stations...",
+    "errorStations": "Failed to load stations.",
+    "unknownCompany": "Unknown company",
+    "reservationSystem": "Reservation system",
+    "yes": "Yes",
+    "no": "No",
+    "unknown": "Unknown",
+    "location": "Location",
+    "viewOnMap": "View on Google Maps",
+    "lastUpdated": "Last updated",
+    "unavailableDate": "Date unavailable",
+    "availability": "Availability",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "paymentMethods": "Payment methods"
+}
